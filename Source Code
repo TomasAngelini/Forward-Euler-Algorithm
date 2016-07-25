@@ -1,0 +1,55 @@
+// Source Code For "Forward-Euler-Algorithm
+
+#include <iostream>
+#include <cmath>
+#include <fstream>
+#include <windows.h>
+using namespace std;
+
+int main() {
+
+	double r[3], v[3], a[3];	
+	double dt = 0.0001;
+
+	fstream f;
+	f.open("resultOrbitCoordinates.txt", ios::out);
+
+	r[0] = 1; // x - axis position
+	r[1] = 0; // y - axis position
+	r[2] = 0; // z - axis position
+	v[0] = 0; // x - axis velocity
+	v[1] = 0.5; // y - axis velocity 
+	v[2] = 0; // z - axis velocity 
+
+	for (int ns = 0; ns < 1000000; ns++) {
+
+		double distanceSquared = r[0] * r[0] + r[1] * r[1] + r[2] * r[2]; // distance squared = the square of each distance component added together
+
+		for (int k = 0; k < 3; k++) {
+
+			a[k] = -r[k] / (distanceSquared * sqrt(distanceSquared));  // the acceleration of a given position component = -distance / distance squared * distance
+
+		} // k for loop
+		for (int k = 0; k < 3; k++) {
+
+			r[k] += v[k] * dt;
+			v[k] += a[k] * dt;
+			
+		}
+
+		cout << r[0] << " " << r[1] << " " << r[2] << " "; 
+		cout << v[0] << " " << v[1] << " " << v[2] << endl;
+
+		// prints out: {X, Y, Z, VX, VY, VZ}
+		f << r[0] << " " << r[1] << " " << r[2] << " ";
+		f << v[0] << " " << v[1] << " " << v[2] << endl;
+
+		
+	} // main for loop
+	f.close();
+	
+	
+	system("PAUSE");
+
+	return 0;
+} 

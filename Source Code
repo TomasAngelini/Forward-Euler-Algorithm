@@ -32,8 +32,8 @@ int main() {
 		} // k for loop
 		for (int k = 0; k < 3; k++) {
 
-			r[k] += v[k] * dt;
-			v[k] += a[k] * dt;
+			r[k] += v[k] * dt; // position = position + (velocity * timestep)
+			v[k] += a[k] * dt; // velocity = velocity + (acceleration * timestep)
 			
 		}
 
